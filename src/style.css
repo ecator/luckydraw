@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  overflow: hidden;
+}
+
+.container {
+  border: none;
+  overflow: hidden;
+  z-index: 10;
+  width: 90%;
+  height: 70%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-top: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+
+
+/* 头像样式 */
+.avatar {
+  display: inline-block;
+  transition: all 0.6s;
+  border-radius: 0px;
+  /*所有的属性在0.6秒之内完成改变*/
+  cursor: pointer;
+  /*s鼠标移上去，变成一个小手的图标，这样比较美观*/
+  background-size: 100% 100%;
+  height: 10px;
+  width: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+/* 员工号 */
+.avatar>div {
+  display: none;
+}
+
+
+/* 放大的头像 */
+.bigimg {
+  width: 33vmin !important;
+  height: 33vmin !important;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: all 1s;
+  z-index: 99;
+  background-size: 100% 100%;
+  box-shadow: 0px 1px 20px 20px #f9d099
+}
+
+/* 放大后的员工号 */
+.bigimg>div {
+  display: block;
+  font-size: medium;
+  text-align: center;
+  transition: all 1s;
+  font-family: "微软雅黑", "Dosis", sans-serif;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+  background-color: #a83922;
+  color: #f9d099;
+}
+
+/* 放大头像动画 */
+@keyframes bigger {}
+
+#titlebox {
+  width: 33%;
+  height: 20%;
+  margin: 0 auto;
+  background-size: 100% 100%;
+}
