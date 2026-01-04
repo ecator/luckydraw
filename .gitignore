@@ -25,13 +25,13 @@ dist-ssr
 
 # Others
 .env
-!/avatar/.gitkeep
 /avatar/*
+!/avatar/.gitkeep
+/audio/*
 !/audio/active.mp3
 !/audio/bg.mp3
-/audio/*
+/img/*
 !/img/bg.png
 !/img/title.png
-/img/*
 
 /release/
