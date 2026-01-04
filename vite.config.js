@@ -15,7 +15,7 @@ export default defineConfig({
         },
         watch: {
             // 告诉 Vite 忽略监听的目录
-            ignored: ['**/src-tauri/**', '**/avatar/**', '**/img/**', '**/audio/**', '**/test/**'],
+            ignored: ['**/src-tauri/**', 'avatar/**', 'img/**', 'audio/**', 'release/**'],
         },
     },
     // 添加有关当前构建目标的额外前缀，使这些 CLI 设置的 Tauri 环境变量可以在客户端代码中访问
