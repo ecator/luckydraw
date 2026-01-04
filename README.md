@@ -9,13 +9,7 @@
 
 需要安装[Node.js](https://nodejs.org/)和[Rust](https://www.rust-lang.org/)环境，然后克隆下来运行`pnpm install`安装依赖，然后运行`pnpm tauri dev`即可。
 如果没有`pnpm`命令需要`npm i -g pnpm`全局安装下。
-为了`pnpm tauri dev`能够正常获取到相关文件路径，需要在`src-tauri`文件夹下运行下面的命令创建快捷方式：
-> Windows的CMD命令
-```
-mklink /j avatar ..\avatar
-mklink /j img ..\img
-mklink /j audio ..\audio
-```
+为了`pnpm tauri dev`能够正常获取到相关文件路径，需要编译成功一次后双击运行`scripts\mklink.bat`这个脚本，只需要运行一次即可，这个命令会在`src-tauri\target\debug`文件夹下创建快捷方式。
 
 # 启动
 

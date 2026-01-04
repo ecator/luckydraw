@@ -34,4 +34,4 @@ dist-ssr
 !/img/title.png
 /img/*
 
-/test/
+/release/
