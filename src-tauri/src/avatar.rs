@@ -1,4 +1,4 @@
-use crate::utils::file_to_data_url;
+use crate::utils::{file_to_data_url, get_execution_path};
 use image::imageops::FilterType;
 use serde::{Deserialize, Serialize};
 use std::fs;
@@ -25,10 +25,13 @@ fn make_thumbnail<P: AsRef<Path>>(
 
 pub fn get_avatars() -> Vec<Avatar> {
     let mut avatars = Vec::new();
-    let Ok(entries) = fs::read_dir("avatar") else {
+    let mut avatar_path = get_execution_path().unwrap();
+    avatar_path.push("avatar");
+    let mut thumb_path: PathBuf = avatar_path.clone();
+    thumb_path.push("thumb");
+    let Ok(entries) = fs::read_dir(avatar_path) else {
         return avatars;
     };
-    let thumb_path: PathBuf = ["avatar", "thumb"].iter().collect();
     if !Path::new(&thumb_path).exists() {
         fs::create_dir_all(&thumb_path).unwrap();
     }
@@ -43,7 +46,7 @@ pub fn get_avatars() -> Vec<Avatar> {
                 let mut thumb_file: PathBuf = thumb_path.clone();
                 thumb_file.push(file_name);
                 if !Path::new(&thumb_file).exists() {
-                    make_thumbnail(&path, &thumb_file, 100).unwrap();
+                    make_thumbnail(&path, &thumb_file, 128).unwrap();
                 }
 
                 avatars.push(Avatar {

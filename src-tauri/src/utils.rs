@@ -1,7 +1,7 @@
 use base64::{engine::general_purpose::STANDARD, Engine};
 use std::error::Error;
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 pub fn file_to_data_url<P: AsRef<Path>>(path: &P) -> Result<String, Box<dyn Error>> {
     let bytes = fs::read(path)?;
@@ -17,4 +17,9 @@ pub fn bin_to_data_url(bytes: &Vec<u8>, mime: &str) -> Result<String, Box<dyn Er
 pub fn file_to_mime<P: AsRef<Path>>(path: &P) -> Result<String, Box<dyn Error>> {
     let mime = mime_guess::from_path(path).first_or_octet_stream();
     Ok(mime.as_ref().to_string())
+}
+
+pub fn get_execution_path() -> Result<PathBuf, Box<dyn Error>> {
+    let path = std::env::current_exe()?;
+    Ok(path.parent().unwrap().to_path_buf())
 }
