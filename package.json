@@ -8,10 +8,12 @@
     "build": "vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "updateVersion": "node scripts/updateVersion.js"
+    "updateVersion": "node scripts/updateVersion.js",
+    "createRelease": "tauri build && node scripts/createRelease.js"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.9.6",
+    "archiver": "^7.0.1",
     "vite": "^7.2.4"
   },
   "dependencies": {
