@@ -12,6 +12,8 @@
 如果没有`pnpm`命令需要`npm i -g pnpm`全局安装下。
 为了`pnpm tauri dev`能够正常获取到相关文件路径，需要编译成功一次后双击运行`scripts\mklink.bat`这个脚本，只需要运行一次即可，这个命令会在`src-tauri\target\debug`文件夹下创建快捷方式。
 
+发布新版本之前需要运行`pnpm updateVersion x.y.z`来更新版本号，然后运行`pnpm createRelease`即可。
+
 # 启动
 
 直接双击`LuckyDraw.exe`文件即可。
