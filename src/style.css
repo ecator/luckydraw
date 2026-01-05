@@ -34,11 +34,11 @@ html {
 /* 头像样式 */
 .avatar {
   display: inline-block;
+  /*所有的属性在0.6秒之内完成改变*/
   transition: all 0.6s;
   border-radius: 0px;
-  /*所有的属性在0.6秒之内完成改变*/
-  cursor: pointer;
   /*s鼠标移上去，变成一个小手的图标，这样比较美观*/
+  cursor: pointer;
   background-size: 100% 100%;
   height: 10px;
   width: 10px;
@@ -55,18 +55,11 @@ html {
 
 /* 放大的头像 */
 .bigimg {
-  width: 33vmin !important;
-  height: 33vmin !important;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   transition: all 1s;
-  z-index: 99;
+  transform: scale(1.6) !important;
   background-size: 100% 100%;
-  box-shadow: 0px 1px 20px 20px #f9d099
+  box-shadow: 0px 1px 20px 20px #f9d099;
+  z-index: 99;
 }
 
 /* 放大后的员工号 */
@@ -92,4 +85,39 @@ html {
   height: 20%;
   margin: 0 auto;
   background-size: 100% 100%;
+}
+
+/* 抽奖人数信息 */
+#drawcount,
+#luckycount {
+  z-index: 99;
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  color: #FFFFFF;
+  background-color: #f9d099;
+  border: none;
+  font-size: 20px;
+}
+
+/* 一次抽奖人数 */
+#drawcount {
+  top: 10px;
+}
+
+/* 已抽中人数 */
+#luckycount {
+  top: 50px;
+}
+
+/* 抽中人员显示容器 */
+#mask {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  top: 0;
 }
