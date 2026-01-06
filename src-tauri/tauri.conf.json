@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "LuckyDraw",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "identifier": "site.nocode.luckydraw",
   "build": {
     "frontendDist": "../dist",
@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "LuckyDraw",
-        "width": 1920,
-        "height": 1080,
+        "width": 1280,
+        "height": 720,
         "resizable": true,
         "fullscreen": false
       }
