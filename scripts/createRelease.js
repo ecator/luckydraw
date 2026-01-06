@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import archiver from 'archiver';
+import { marked } from 'marked';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,6 +21,9 @@ if (!fs.existsSync(exeFile)) {
 }
 
 const envFile = path.join(__dirname, '..', '.env.example');
+const readmeFile = path.join(__dirname, '..', 'README.md');
+const readmeFileContent = fs.readFileSync(readmeFile, 'utf8');
+const readmeFileContentHtml = marked.parse(readmeFileContent);
 
 const releasePath = path.join(__dirname, '..', 'release');
 fs.existsSync(releasePath) || fs.mkdirSync(releasePath);
@@ -40,6 +44,8 @@ fs.copyFileSync(exeFile, path.join(releasePath, 'LuckyDraw.exe'));
 
 fs.copyFileSync(envFile, path.join(releasePath, '.env'));
 
+fs.writeFileSync(path.join(releasePath, 'README.html'), readmeFileContentHtml);
+
 // 打包
 const output = fs.createWriteStream(zipPath);
 const archive = archiver('zip', { zlib: { level: 9 } });
@@ -53,6 +59,7 @@ archive.pipe(output);
 // 将 release 目录下的内容全选入压缩包（排除 zip 本身）
 archive.file(path.join(releasePath, 'LuckyDraw.exe'), { name: 'LuckyDraw.exe' });
 archive.file(path.join(releasePath, '.env'), { name: '.env' });
+archive.file(path.join(releasePath, 'README.html'), { name: 'README.html' });
 archive.append(null, { name: 'avatar/' });
 archive.directory(avatarPath, 'avatar');
 archive.append(null, { name: 'audio/' });
