@@ -16,6 +16,16 @@ pub fn get_avatars() -> Vec<avatar::Avatar> {
 }
 
 #[tauri::command]
+pub fn get_lucky_list() -> Vec<String> {
+    avatar::get_lucky_list()
+}
+
+#[tauri::command]
+pub fn save_lucky_list(lucky_list: Vec<String>) {
+    avatar::save_lucky_list(lucky_list)
+}
+
+#[tauri::command]
 pub fn get_imgs() -> HashMap<String, String> {
     let mut imgs: HashMap<String, String> = HashMap::new();
     let mut img_path = get_execution_path().unwrap();

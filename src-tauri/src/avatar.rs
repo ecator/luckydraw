@@ -74,3 +74,29 @@ pub fn get_avatars() -> Vec<Avatar> {
     }
     avatars
 }
+
+///
+/// 获取已经抽中的列表
+///
+pub fn get_lucky_list() -> Vec<String> {
+    let mut lucky_list: Vec<String> = Vec::new();
+    let mut lucky_path = get_execution_path().unwrap();
+    lucky_path.push("lucky.txt");
+    if !lucky_path.exists() {
+        return lucky_list;
+    }
+    let lucky_content = fs::read_to_string(&lucky_path).unwrap().trim().to_string();
+    lucky_content.lines().for_each(|line| {
+        lucky_list.push(line.to_string());
+    });
+    lucky_list
+}
+
+///
+/// 保存已经抽中的列表
+///
+pub fn save_lucky_list(lucky_list: Vec<String>) {
+    let mut lucky_path = get_execution_path().unwrap();
+    lucky_path.push("lucky.txt");
+    fs::write(lucky_path, lucky_list.join("\n")).unwrap();
+}

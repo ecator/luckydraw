@@ -14,7 +14,7 @@ export function useKeyboard({
 }) {
   const luckyStore = useLuckyStore();
 
-  function handleKeyDown(event: KeyboardEvent) {
+  async function handleKeyDown(event: KeyboardEvent) {
     const { key, code, shiftKey } = event;
     console.log(`Key pressed: ${key} (code: ${code}, shift: ${shiftKey})`);
 
@@ -53,8 +53,8 @@ export function useKeyboard({
       if (!confirm('Are you sure you want to clear all drawn winners?')) {
         return;
       }
-      clearDrawnAvatars();
-      luckyStore.loadDrawnAvatars();
+      await clearDrawnAvatars();
+      await luckyStore.loadDrawnAvatars();
       return;
     }
 

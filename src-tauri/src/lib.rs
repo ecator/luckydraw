@@ -19,6 +19,8 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             commands::get_config,
             commands::get_avatars,
+            commands::get_lucky_list,
+            commands::save_lucky_list,
             commands::get_imgs,
             commands::get_audios,
             commands::toggle_full_screen

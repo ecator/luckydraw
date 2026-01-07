@@ -52,8 +52,8 @@ onMounted(async () => {
     const audios = await getAudios();
     assetsStore.setAudios(audios);
 
-    // Load drawn avatars from localStorage
-    luckyStore.loadDrawnAvatars();
+    // Load drawn avatars from Storage
+    await luckyStore.loadDrawnAvatars();
 
     // Initialize audio elements
     initAudioElements();

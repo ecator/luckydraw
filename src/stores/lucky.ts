@@ -72,18 +72,18 @@ export const useLuckyStore = defineStore('lucky', () => {
     luckyState.value = state;
   }
 
-  function addDrawnAvatars(empnos: string[]) {
+  async function addDrawnAvatars(empnos: string[]) {
     drawnEmpnos.value.push(...empnos);
-    setDrawnAvatars(drawnEmpnos.value);
+    await setDrawnAvatars(drawnEmpnos.value);
   }
 
-  function loadDrawnAvatars() {
-    drawnEmpnos.value = getDrawnAvatars();
+  async function loadDrawnAvatars() {
+    drawnEmpnos.value = await getDrawnAvatars();
   }
 
-  function clearDrawnAvatars() {
+  async function clearDrawnAvatars() {
     drawnEmpnos.value = [];
-    setDrawnAvatars([]);
+    await clearDrawnAvatars();
   }
 
   return {

@@ -1,27 +1,14 @@
-// LocalStorage keys
-export const STORAGE_KEYS = {
-  LUCKY_AVATARS: 'luckyAavatars',
-  EMPNO: 'empno',
-} as const;
+import { getLuckyList, saveLuckyList } from './tauri';
 
-// Type-safe localStorage utilities
-export function getDrawnAvatars(): string[] {
-  const stored = localStorage.getItem(STORAGE_KEYS.LUCKY_AVATARS);
-  if (
-    !stored ||
-    stored.trim() === '' ||
-    !stored.trim().startsWith('[') ||
-    !stored.trim().endsWith(']')
-  ) {
-    return [];
-  }
-  return JSON.parse(stored) as string[];
+export async function getDrawnAvatars(): Promise<string[]> {
+  const luckyList = await getLuckyList();
+  return luckyList;
 }
 
-export function setDrawnAvatars(avatars: string[]): void {
-  localStorage.setItem(STORAGE_KEYS.LUCKY_AVATARS, JSON.stringify(avatars));
+export async function setDrawnAvatars(avatars: string[]): Promise<void> {
+  await saveLuckyList(avatars);
 }
 
-export function clearDrawnAvatars(): void {
-  localStorage.removeItem(STORAGE_KEYS.LUCKY_AVATARS);
+export async function clearDrawnAvatars(): Promise<void> {
+  await saveLuckyList([]);
 }

@@ -38,3 +38,11 @@ export async function getAudios(): Promise<Record<AudioKey, string>> {
 export async function toggleFullScreen(): Promise<void> {
   await invoke<void>('toggle_full_screen');
 }
+
+export async function getLuckyList(): Promise<string[]> {
+  return await invoke<string[]>('get_lucky_list');
+}
+
+export async function saveLuckyList(luckyList: string[]): Promise<void> {
+  await invoke<void>('save_lucky_list', { luckyList });
+}
