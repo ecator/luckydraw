@@ -27,7 +27,7 @@ const calculateSpherePositions = (count: number, radius: number) => {
 
   for (let i = 0; i < count; i++) {
     // Fibonacci sphere algorithm for uniform distribution
-    const y = 1 - (i / (count - 1)) * 2; // y from 1 to -1
+    const y = count > 1 ? 1 - (i / (count - 1)) * 2 : 0; // y from 1 to -1
     const radiusAtY = Math.sqrt(1 - y * y);
     const theta = goldenAngle * i;
 
@@ -90,6 +90,13 @@ const sphereAvatars = computed(() => {
   });
 });
 
+// Calculate avatar size based on sphere radius and count
+const avatarPlaneSize = computed(() => {
+  const count = luckyStore.availableAvatars.length;
+  // Adjust size based on density
+  return Math.max(1.5, sphereRadius.value / Math.sqrt(count));
+});
+
 // Update rotation speed based on lucky state
 watch(
   () => luckyStore.luckyState,
@@ -119,13 +126,6 @@ const animate = () => {
 // Start animation on mount
 onMounted(() => {
   animate();
-});
-
-// Calculate avatar size based on sphere radius and count
-const avatarPlaneSize = computed(() => {
-  const count = luckyStore.availableAvatars.length;
-  // Adjust size based on density
-  return Math.max(1.5, sphereRadius.value / Math.sqrt(count));
 });
 </script>
 
