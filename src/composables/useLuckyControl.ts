@@ -12,12 +12,12 @@ export function useLuckyControl() {
    */
   async function runDraw() {
     if (luckyStore.availableAvatars.length === 0) {
-      alert('No available avatars to draw from!');
+      alert('已经没有人可以抽奖了！');
       return;
     }
     if (luckyStore.availableAvatars.length < luckyStore.drawCount) {
       alert(
-        `Not enough avatars to draw from!\nThere are only ${luckyStore.availableAvatars.length} avatars available, but ${luckyStore.drawCount} are needed.`
+        `抽奖人数不足！\n只剩${luckyStore.availableAvatars.length}人可以抽奖了, 但是现在要抽${luckyStore.drawCount}人😂`
       );
       return;
     }

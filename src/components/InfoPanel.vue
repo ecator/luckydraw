@@ -22,10 +22,14 @@ const titleStyle = computed(() => {
 
 <template>
   <div class="info-panel">
-    <div class="draw-count">一次抽取: {{ luckyStore.drawCount }} 人</div>
+    <div class="draw-count">一次抽: {{ luckyStore.drawCount }} 人</div>
     <div class="lucky-count">
-      已抽中: {{ luckyStore.drawnEmpnos.length }} 人
+      已中奖: {{ luckyStore.drawnEmpnos.length }} 人
     </div>
+    <div class="lucky-count">
+      未中奖: {{ luckyStore.availableAvatars.length }} 人
+    </div>
+    <div class="lucky-count">总人数: {{ luckyStore.allAvatars.length }} 人</div>
   </div>
   <div class="titlebox" :style="titleStyle" />
 </template>
@@ -34,8 +38,8 @@ const titleStyle = computed(() => {
 .info-panel {
   position: absolute;
   z-index: 99;
-  left: 20px;
-  top: 10px;
+  left: 10px;
+  top: 5px;
 }
 
 .draw-count,
@@ -43,9 +47,9 @@ const titleStyle = computed(() => {
   color: #ffffff;
   background-color: #f9d099;
   border: none;
-  font-size: 20px;
-  padding: 8px 12px;
-  margin-bottom: 10px;
+  font-size: 16px;
+  padding: 4px 6px;
+  margin-bottom: 3px;
   border-radius: 4px;
 }
 
