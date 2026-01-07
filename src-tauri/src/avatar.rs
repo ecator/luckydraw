@@ -27,32 +27,47 @@ pub fn get_avatars() -> Vec<Avatar> {
     let mut avatars = Vec::new();
     let mut avatar_path = get_execution_path().unwrap();
     avatar_path.push("avatar");
-    let mut thumb_path: PathBuf = avatar_path.clone();
-    thumb_path.push("thumb");
-    let Ok(entries) = fs::read_dir(avatar_path) else {
+    let Ok(entries) = fs::read_dir(&avatar_path) else {
         return avatars;
     };
-    if !Path::new(&thumb_path).exists() {
-        fs::create_dir_all(&thumb_path).unwrap();
+    let mut thumb_path_small: PathBuf = avatar_path.clone();
+    thumb_path_small.push("small");
+    if !Path::new(&thumb_path_small).exists() {
+        fs::create_dir_all(&thumb_path_small).unwrap();
+    }
+    let mut thumb_path_normal: PathBuf = avatar_path.clone();
+    thumb_path_normal.push("normal");
+    if !Path::new(&thumb_path_normal).exists() {
+        fs::create_dir_all(&thumb_path_normal).unwrap();
     }
     for entry in entries {
         let entry = entry.unwrap();
         let path = entry.path();
         if let Some(ext) = path.extension() {
             if ext.eq_ignore_ascii_case("jpg") || ext.eq_ignore_ascii_case("jpeg") {
+                let modified = path.metadata().unwrap().modified().unwrap();
                 // 构造输出路径：保持子目录结构
                 let file_name = path.file_name().unwrap();
                 let basename = path.file_stem().unwrap();
-                let mut thumb_file: PathBuf = thumb_path.clone();
-                thumb_file.push(file_name);
-                if !Path::new(&thumb_file).exists() {
-                    make_thumbnail(&path, &thumb_file, 128).unwrap();
+                let mut thumb_file_small: PathBuf = thumb_path_small.clone();
+                thumb_file_small.push(file_name);
+                if !thumb_file_small.exists()
+                    || modified > thumb_file_small.metadata().unwrap().modified().unwrap()
+                {
+                    make_thumbnail(&path, &thumb_file_small, 128).unwrap();
+                }
+                let mut thumb_file_normal: PathBuf = thumb_path_normal.clone();
+                thumb_file_normal.push(file_name);
+                if !thumb_file_normal.exists()
+                    || modified > thumb_file_normal.metadata().unwrap().modified().unwrap()
+                {
+                    make_thumbnail(&path, &thumb_file_normal, 512).unwrap();
                 }
 
                 avatars.push(Avatar {
                     empno: basename.to_str().unwrap().to_string(),
-                    data_url: file_to_data_url(&path).unwrap(),
-                    data_url_thumbnail: file_to_data_url(&thumb_file).unwrap(),
+                    data_url: file_to_data_url(&thumb_file_normal).unwrap(),
+                    data_url_thumbnail: file_to_data_url(&thumb_file_small).unwrap(),
                 });
             }
         }
