@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useLuckyStore } from '@/stores/lucky';
 import { useAssetsStore } from '@/stores/assets';
 import { getConfig, getAvatars, getImages, getAudios } from '@/api/tauri';
@@ -11,8 +11,10 @@ import InfoPanel from '@/components/InfoPanel.vue';
 import AvatarGrid from '@/components/AvatarGrid.vue';
 import Avatar3D from '@/components/Avatar3D.vue';
 import LuckMask from '@/components/LuckMask.vue';
+import SplashScreen from '@/components/SplashScreen.vue';
 import { useLayout } from '@/composables/useLayout';
 
+const isLoading = ref(true);
 const luckyStore = useLuckyStore();
 const assetsStore = useAssetsStore();
 
@@ -55,6 +57,8 @@ onMounted(async () => {
 
     // Initialize audio elements
     initAudioElements();
+
+    isLoading.value = false;
   } catch (error) {
     console.error('Failed to initialize application:', error);
   }
@@ -66,6 +70,7 @@ onUnmounted(() => {});
 </script>
 
 <template>
+  <SplashScreen :loading="isLoading" />
   <BackgroundLayer />
   <InfoPanel />
   <AvatarGrid
