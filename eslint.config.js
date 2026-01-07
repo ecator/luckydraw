@@ -58,6 +58,7 @@ export default [
         KeyboardEvent: 'readonly',
         clearTimeout: 'readonly',
         setTimeout: 'readonly',
+        requestAnimationFrame: 'readonly',
       },
     },
     plugins: {
@@ -118,6 +119,7 @@ export default [
         document: 'readonly',
         alert: 'readonly',
         confirm: 'readonly',
+        requestAnimationFrame: 'readonly',
       },
     },
     plugins: {

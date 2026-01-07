@@ -9,6 +9,7 @@ import { useAudio } from '@/composables/useAudio';
 import BackgroundLayer from '@/components/BackgroundLayer.vue';
 import InfoPanel from '@/components/InfoPanel.vue';
 import AvatarGrid from '@/components/AvatarGrid.vue';
+import Avatar3D from '@/components/Avatar3D.vue';
 import LuckMask from '@/components/LuckMask.vue';
 import { useLayout } from '@/composables/useLayout';
 
@@ -36,6 +37,7 @@ onMounted(async () => {
     // Load configuration
     const config = await getConfig();
     luckyStore.setConfig(config);
+    luckyStore.setLuckyMode(config.LUCKY_MODE);
 
     // Load avatars
     const avatars = await getAvatars();
@@ -66,8 +68,12 @@ onUnmounted(() => {});
 <template>
   <BackgroundLayer />
   <InfoPanel />
-  <AvatarGrid :avatarSize="avatarSize" />
-  <LuckMask :maskAvatarSize="maskAvatarSize" />
+  <AvatarGrid
+    v-if="luckyStore.luckyMode === 'grid'"
+    :avatar-size="avatarSize"
+  />
+  <Avatar3D v-else />
+  <LuckMask :mask-avatar-size="maskAvatarSize" />
 </template>
 
 <style scoped></style>

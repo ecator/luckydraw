@@ -67,6 +67,16 @@ export function useKeyboard({
       return;
     }
 
+    // Toggle between grid and 3D mode (F1/F2)
+    if (
+      (key === 'F1' || key === 'F2') &&
+      luckyStore.luckyState === LuckyState.INITIAL
+    ) {
+      const mode = key === 'F1' ? 'grid' : '3d';
+      luckyStore.setLuckyMode(mode);
+      return;
+    }
+
     // Handle number keys 1-9 - switch lottery level
     if (
       !shiftKey &&

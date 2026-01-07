@@ -13,6 +13,7 @@ pub struct Config {
     pub full_screen_key: String,
     pub lucky_times: Vec<u32>,
     pub lucky_speeds: Vec<f64>,
+    pub lucky_mode: String,
 }
 
 const DEFULT_CONFIG: &str = include_str!("../../.env.example");
@@ -28,6 +29,7 @@ impl Config {
         let lucky_times: Vec<u32> = serde_json::from_str(&lucky_times).unwrap();
         let lucky_speeds = env::var("LUCKY_SPEEDS").unwrap();
         let lucky_speeds: Vec<f64> = serde_json::from_str(&lucky_speeds).unwrap();
+        let lucky_mode = env::var("LUCKY_MODE").unwrap();
         Self {
             lucky_key,
             lucky_init_key,
@@ -35,6 +37,7 @@ impl Config {
             full_screen_key,
             lucky_times,
             lucky_speeds,
+            lucky_mode,
         }
     }
 }

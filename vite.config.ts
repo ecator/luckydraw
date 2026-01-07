@@ -3,7 +3,15 @@ import vue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('Tres') && tag !== 'TresCanvas',
+        },
+      },
+    }),
+  ],
 
   // 防止 Vite 清除 Rust 显示的错误
   clearScreen: false,

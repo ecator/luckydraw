@@ -11,6 +11,9 @@ export type LuckyLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 // Draw count type (1-10)
 export type DrawCount = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
+// Lucky mode type
+export type LuckyMode = 'grid' | '3d';
+
 // Image key types
 export type ImageKey =
   | 'bg'

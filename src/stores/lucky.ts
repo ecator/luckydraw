@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import type { Avatar, Config } from '@/types/config';
-import type { LuckyLevel, DrawCount } from '@/types/lucky';
+import type { LuckyLevel, DrawCount, LuckyMode } from '@/types/lucky';
 import { LuckyState } from '@/types/lucky';
 import { getDrawnAvatars, setDrawnAvatars } from '@/api/storage';
 
@@ -10,6 +10,7 @@ export const useLuckyStore = defineStore('lucky', () => {
   const luckyState = ref<LuckyState>(LuckyState.INITIAL);
   const luckyLevel = ref<LuckyLevel>(1);
   const drawCount = ref<DrawCount>(1);
+  const luckyMode = ref<LuckyMode>('grid');
 
   // Configuration
   const config = ref<Config | null>(null);
@@ -63,6 +64,10 @@ export const useLuckyStore = defineStore('lucky', () => {
     drawCount.value = count;
   }
 
+  function setLuckyMode(mode: LuckyMode) {
+    luckyMode.value = mode;
+  }
+
   function setLuckyState(state: LuckyState) {
     luckyState.value = state;
   }
@@ -86,6 +91,7 @@ export const useLuckyStore = defineStore('lucky', () => {
     luckyState,
     luckyLevel,
     drawCount,
+    luckyMode,
     config,
     allAvatars,
     drawnEmpnos,
@@ -99,6 +105,7 @@ export const useLuckyStore = defineStore('lucky', () => {
     setAllAvatars,
     setLuckyLevel,
     setDrawCount,
+    setLuckyMode,
     setLuckyState,
     addDrawnAvatars,
     loadDrawnAvatars,
